@@ -1,0 +1,64 @@
+.board-container {
+  padding-top: 20vh;
+  background-color: burlywood;
+  padding-bottom: 50vh;
+}
+
+.board-grid {
+  display: grid;
+  grid-template-columns: 7.5vh 7.5vh 7.5vh 7.5vh 7.5vh 7.5vh 7.5vh 7.5vh;
+  gap: 0.1vh;
+  margin-left: 20vh;
+  justify-content: center;
+  align-items: center;
+}
+
+.tile {
+  outline-style: solid;
+  outline-width: 0.001vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.white-tile {
+  background-color: blanchedalmond;
+  width: 7.5vh;
+  height: 7.5vh;
+}
+
+.black-tile {
+  background-color: rgb(46, 150, 60);
+  width: 7.5vh;
+  height: 7.5vh;
+}
+
+.piece {
+  position: absolute;
+  width: 7vh;
+  height: 7vh;
+}
+
+.piece:hover {
+  cursor: grab;
+}
+
+.white-highlight {
+  content: "";
+  position: absolute;
+  width: 2.5vh;
+  height: 2.5vh;
+  background-color: rgba(116, 109, 109, 0.301);
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.black-highlight {
+  content: "";
+  position: absolute;
+  width: 2.5vh;
+  height: 2.5vh;
+  background-color: rgba(82, 78, 78, 0.342);
+  border-radius: 50%;
+  z-index: 1;
+}
