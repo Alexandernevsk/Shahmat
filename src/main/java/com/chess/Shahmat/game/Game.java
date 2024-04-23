@@ -18,7 +18,7 @@ public class Game {
     @GeneratedValue
     private Long id;
 
-    @Column(length = 1024)
+    @Column(length = 2500)
     private String pgn;
 
     private String ECO_Code;

@@ -102,10 +102,10 @@ public class PgnFormat {
 
         if (firstAndLast.length <= 1) {
             firstAndLast[0] = firstAndLast[0].trim();
-            master.setLastName(firstAndLast[0]);
+            master.setLastName(firstAndLast[0].trim());
         } else {
-            master.setFirstName(firstAndLast[1]);
-            master.setLastName(firstAndLast[0]);
+            master.setFirstName(firstAndLast[1].trim());
+            master.setLastName(firstAndLast[0].trim());
         }
     }
 

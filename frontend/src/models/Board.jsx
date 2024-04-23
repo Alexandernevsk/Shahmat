@@ -11,7 +11,7 @@ export class Board {
       .fill(8)
       .map((x, y) => x - y);
     this.file = Array(8)
-      .fill("a")
+      .fill("a")  
       .map((x, y) => String.fromCodePoint(x.codePointAt(0) + y));
     this.pieces = [];
     this.standardPieceSetup();
