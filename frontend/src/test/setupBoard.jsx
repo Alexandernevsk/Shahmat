@@ -11,9 +11,19 @@ export const Test = () => {
     setBoard(createBoard(fen));
   }, [fen]);
 
+  const fromPos = useRef();
+  const makeMove = (pos) => {
+    const from = fromPos.current;
+    const to = pos;
+    chess.move({ from, to });
+    setFen(chess.fen());
+  };
+
+  const setFromPos = (pos) => (fromPos.current = pos);
+
   return (
     <div className="game">
-      <TestBoard cells={board} />
+      <TestBoard cells={board} makeMove={makeMove} setFromPos={setFromPos} />
     </div>
   );
 };
@@ -59,7 +69,7 @@ function createBoard(fen) {
   return board;
 }
 
-class Tile {
+export class Tile {
   constructor(piece, position) {
     this.piece = piece;
     this.position = position;
