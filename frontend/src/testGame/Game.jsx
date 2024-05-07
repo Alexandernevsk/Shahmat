@@ -4,19 +4,39 @@ import { createBoard } from "./functions/create-board";
 import Board from "./components/Board";
 import { GameContext } from "./context/GameContext";
 import { types } from "./context/actions";
+import { resolve } from "./functions/resolve";
+import { GameOver } from "./components/GameOver";
 
 const FEN = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
+
 export const Game = () => {
   const [fen, setFen] = useState(FEN);
   const { current: chess } = useRef(new Chess(fen));
   const [board, setBoard] = useState(createBoard(fen));
-  const { dispatch } = useContext(GameContext);
+  const { dispatch, gameOver } = useContext(GameContext);
+  const fromPos = useRef();
 
   useEffect(() => {
     setBoard(createBoard(fen));
   }, [fen]);
 
-  const fromPos = useRef();
+  useEffect(() => {
+    const [gameOver, status] = resolve(chess);
+
+    if (gameOver) {
+      dispatch({
+        type: types.GAME_OVER,
+        status,
+        player: chess.turn(),
+      });
+    }
+
+    dispatch({
+      type: types.SET_TURN,
+      player: chess.turn(),
+      check: chess.inCheck(),
+    });
+  }, [fen, dispatch, chess]);
 
   const makeMove = (pos) => {
     const from = fromPos.current;
@@ -33,6 +53,10 @@ export const Game = () => {
       moves: chess.moves({ square: pos }),
     });
   };
+
+  if (gameOver) {
+    return <GameOver />;
+  }
 
   return (
     <div className="game">
